@@ -239,6 +239,62 @@
             populateCMSForm();
         }
 
+        function getCMSExportData() {
+            const exported = {};
+            Object.keys(defaultCmsText).forEach(key => {
+                const editText = document.querySelector(`[data-edit-key="${key}"]`);
+                const editSrc = document.querySelector(`[data-edit-src="${key}"]`);
+                const preview = document.querySelector(`[data-preview-for="${key}"]`);
+
+                if (editSrc) {
+                    exported[key] = editSrc.src;
+                } else if (preview && preview.src) {
+                    exported[key] = preview.src;
+                } else if (editText) {
+                    exported[key] = editText.innerHTML;
+                } else {
+                    exported[key] = defaultCmsText[key];
+                }
+            });
+            return exported;
+        }
+
+        function exportCMSShare() {
+            const data = getCMSExportData();
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const link = document.createElement('a');
+            link.download = 'lovely-share.json';
+            link.href = URL.createObjectURL(blob);
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(link.href);
+        }
+
+        function importCMSShare(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                try {
+                    const importedData = JSON.parse(reader.result);
+                    if (typeof importedData !== 'object' || importedData === null) {
+                        throw new Error('Invalid share file');
+                    }
+                    localStorage.setItem(cmsStorageKey, JSON.stringify(importedData));
+                    applyCMSData(importedData);
+                    populateCMSForm();
+                    alert('Shared page loaded successfully!');
+                } catch (error) {
+                    console.error('Import failed', error);
+                    alert('Failed to load shared file. Make sure it is a valid JSON share file.');
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
         function applyCMSData(data) {
             const values = Object.assign({}, defaultCmsText, data);
             Object.keys(values).forEach(key => {

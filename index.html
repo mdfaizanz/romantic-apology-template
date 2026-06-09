@@ -118,6 +118,9 @@
         <div class="cms-actions">
             <button onclick="saveCMS()">Save changes</button>
             <button onclick="resetCMS()">Reset defaults</button>
+            <button onclick="exportCMSShare()" type="button">Export share file</button>
+            <button onclick="document.getElementById('share-file-input').click()" type="button">Import share file</button>
+            <input id="share-file-input" type="file" accept="application/json" onchange="importCMSShare(event)" hidden>
         </div>
     </div>
 
