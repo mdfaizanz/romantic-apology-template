@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Darling, I'm Sorry 💕</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="love-overlay" aria-hidden="true">
+        <span style="--x: 8%; --y: 18%; --s: 0.8; --o:0.45; --d: 0s;"></span>
+        <span style="--x: 22%; --y: 10%; --s: 1.1; --o:0.35; --d: 1s;"></span>
+        <span style="--x: 70%; --y: 14%; --s: 0.7; --o:0.42; --d: 0.5s;"></span>
+        <span style="--x: 34%; --y: 70%; --s: 0.9; --o:0.38; --d: 1.3s;"></span>
+        <span style="--x: 80%; --y: 62%; --s: 1.2; --o:0.3; --d: 0.7s;"></span>
+        <span style="--x: 54%; --y: 26%; --s: 0.65; --o:0.5; --d: 1.7s;"></span>
+        <span style="--x: 14%; --y: 58%; --s: 0.95; --o:0.33; --d: 2.1s;"></span>
+        <span style="--x: 88%; --y: 85%; --s: 0.8; --o:0.28; --d: 1.9s;"></span>
+        <span style="--x: 42%; --y: 42%; --s: 0.75; --o:0.4; --d: 2.4s;"></span>
+        <span style="--x: 62%; --y: 82%; --s: 1; --o:0.3; --d: 2.8s;"></span>
+    </div>
+
+    <div class="edit-toolbar">
+        <button id="open-cms" onclick="openCMSPanel()">Open CMS</button>
+    </div>
+
+    <div id="cms-panel" class="cms-panel" aria-hidden="true">
+        <div class="cms-header">
+            <h2>Simple CMS</h2>
+            <button class="cms-close" onclick="closeCMSPanel()" aria-label="Close CMS">✕</button>
+        </div>
+        <div class="cms-body">
+            <p>Update the page text here, then save to keep your changes in this browser.</p>
+            <div class="cms-field">
+                <label for="cms-hero-title">Hero title</label>
+                <input id="cms-hero-title" data-cms-key="hero-title" type="text">
+            </div>
+            <div class="cms-field">
+                <label for="cms-hero-text">Hero paragraph</label>
+                <textarea id="cms-hero-text" data-cms-key="hero-text" rows="3"></textarea>
+            </div>
+            <div class="cms-field">
+                <label for="cms-quotes-title">Quotes section title</label>
+                <input id="cms-quotes-title" data-cms-key="quotes-title" type="text">
+            </div>
+            <div class="cms-field">
+                <label for="cms-quote-text">First quote text</label>
+                <textarea id="cms-quote-text" data-cms-key="quote-text" rows="2"></textarea>
+            </div>
+            <div class="cms-field">
+                <label for="cms-quote-author">Quote author</label>
+                <input id="cms-quote-author" data-cms-key="quote-author" type="text">
+            </div>
+            <div class="cms-field">
+                <label for="cms-gallery-title">Gallery title</label>
+                <input id="cms-gallery-title" data-cms-key="gallery-title" type="text">
+            </div>
+            <div class="cms-field">
+                <label for="cms-gallery-img-1">Upload gallery image 1</label>
+                <input id="cms-gallery-img-1" data-cms-key="gallery-img-1" type="file" accept="image/*" onchange="updateImagePreview(this)">
+                <img class="cms-image-preview" data-preview-for="gallery-img-1" alt="Preview image 1">
+            </div>
+            <div class="cms-field">
+                <label for="cms-gallery-img-2">Upload gallery image 2</label>
+                <input id="cms-gallery-img-2" data-cms-key="gallery-img-2" type="file" accept="image/*" onchange="updateImagePreview(this)">
+                <img class="cms-image-preview" data-preview-for="gallery-img-2" alt="Preview image 2">
+            </div>
+            <div class="cms-field">
+                <label for="cms-gallery-img-3">Upload gallery image 3</label>
+                <input id="cms-gallery-img-3" data-cms-key="gallery-img-3" type="file" accept="image/*" onchange="updateImagePreview(this)">
+                <img class="cms-image-preview" data-preview-for="gallery-img-3" alt="Preview image 3">
+            </div>
+            <div class="cms-field">
+                <label for="cms-gallery-img-4">Upload gallery image 4</label>
+                <input id="cms-gallery-img-4" data-cms-key="gallery-img-4" type="file" accept="image/*" onchange="updateImagePreview(this)">
+                <img class="cms-image-preview" data-preview-for="gallery-img-4" alt="Preview image 4">
+            </div>
+            <div class="cms-field">
+                <label for="cms-final-img-1">Upload final card image 1</label>
+                <input id="cms-final-img-1" data-cms-key="final-img-1" type="file" accept="image/*" onchange="updateImagePreview(this)">
+                <img class="cms-image-preview" data-preview-for="final-img-1" alt="Preview final image 1">
+            </div>
+            <div class="cms-field">
+                <label for="cms-final-img-2">Upload final card image 2</label>
+                <input id="cms-final-img-2" data-cms-key="final-img-2" type="file" accept="image/*" onchange="updateImagePreview(this)">
+                <img class="cms-image-preview" data-preview-for="final-img-2" alt="Preview final image 2">
+            </div>
+            <div class="cms-field">
+                <label for="cms-emoji-title">Emoji section title</label>
+                <input id="cms-emoji-title" data-cms-key="emoji-title" type="text">
+            </div>
+            <div class="cms-field">
+                <label for="cms-emoji-text">Emoji section subtitle</label>
+                <textarea id="cms-emoji-text" data-cms-key="emoji-text" rows="2"></textarea>
+            </div>
+            <div class="cms-field">
+                <label for="cms-forgive-title">Forgive section title</label>
+                <input id="cms-forgive-title" data-cms-key="forgive-title" type="text">
+            </div>
+            <div class="cms-field">
+                <label for="cms-thankyou-title">Thank-you title</label>
+                <input id="cms-thankyou-title" data-cms-key="thankyou-title" type="text">
+            </div>
+            <div class="cms-field">
+                <label for="cms-poem-text">Poem text</label>
+                <textarea id="cms-poem-text" data-cms-key="poem-text" rows="4"></textarea>
+            </div>
+            <div class="cms-field">
+                <label for="cms-final-title">Final card title</label>
+                <input id="cms-final-title" data-cms-key="final-title" type="text">
+            </div>
+            <div class="cms-field">
+                <label for="cms-final-message">Final card message</label>
+                <textarea id="cms-final-message" data-cms-key="final-message" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="cms-actions">
+            <button onclick="saveCMS()">Save changes</button>
+            <button onclick="resetCMS()">Reset defaults</button>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <div id="hero" class="section hero active">
+        <div class="content">
+            <h1 data-edit-key="hero-title">I'm Sorry, My Love...</h1>
+            <p class="romantic-text" data-edit-key="hero-text">Every moment without your smile feels like a lifetime. I made a mistake, and my heart aches for you. Please let me make it right, my beautiful girl. 💕</p>
+            <button onclick="startJourney()">Open My Heart to You</button>
+            <div class="hero-emoji">❤️❤️❤️</div>
+        </div>
+    </div>
+
+    <!-- QUOTES SECTION -->
+    <div id="quotes" class="section quotes-section" style="display: none;">
+        <div class="content soft-card">
+            <h1 data-edit-key="quotes-title">A Few Words From My Heart</h1>
+            <div id="quote-text" class="quote" data-edit-key="quote-text">"You are my sun, my moon, and all my stars."</div>
+            <p class="quote-author" data-edit-key="quote-author">— E.E. Cummings</p>
+            <button class="secondary" onclick="nextQuote()">Next Sweet Thought →</button>
+        </div>
+    </div>
+
+    <!-- PHOTO GALLERY -->
+    <div id="gallery" class="section gallery-section" style="display: none;">
+        <div class="content">
+            <h1 data-edit-key="gallery-title">Our Beautiful Memories</h1>
+            <div class="photo-slider soft-card">
+                <button class="slider-btn left" onclick="prevSlide()">←</button>
+                <div class="slides" id="slides">
+                    <div class="slide"><img id="gallery-img-1" data-edit-src="gallery-img-1" src="https://picsum.photos/id/1015/800/500" alt="Memory 1"></div>
+                    <div class="slide"><img id="gallery-img-2" data-edit-src="gallery-img-2" src="https://picsum.photos/id/1027/800/500" alt="Memory 2"></div>
+                    <div class="slide"><img id="gallery-img-3" data-edit-src="gallery-img-3" src="https://picsum.photos/id/106/800/500" alt="Memory 3"></div>
+                    <div class="slide"><img id="gallery-img-4" data-edit-src="gallery-img-4" src="https://picsum.photos/id/1005/800/500" alt="Memory 4"></div>
+                </div>
+                <button class="slider-btn right" onclick="nextSlide()">→</button>
+            </div>
+            <button class="secondary" onclick="nextSection('emoji-section')">Continue →</button>
+        </div>
+    </div>
+
+    <!-- EMOJI SECTION -->
+    <div id="emoji-section" class="section emoji-section" style="display: none;">
+        <div class="content soft-card">
+            <h1 data-edit-key="emoji-title">Are you happy right now?</h1>
+            <div id="emoji" class="emoji-container" onclick="changeEmoji()">😊</div>
+            <p id="emoji-text" class="emoji-text" data-edit-key="emoji-text">Click me if I'm making you smile...</p>
+            <button class="secondary" onclick="nextSection('forgive-section')">Keep Going</button>
+        </div>
+    </div>
+
+    <!-- FORGIVE SECTION -->
+    <div id="forgive-section" class="section forgive-section" style="display: none;">
+        <div class="content soft-card forgiv-card">
+            <h1 data-edit-key="forgive-title">Have you forgiven me already?</h1>
+            <div class="choice-row">
+                <button onclick="sayYes()">Yes 💕</button>
+                <button id="no-btn" class="dodge-btn" onmouseover="dodgeNo(this)">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- THANK YOU + POEM -->
+    <div id="thankyou" class="section thankyou-section" style="display: none;">
+        <div class="content">
+            <h1 data-edit-key="thankyou-title">Thank You, My Love ❤️</h1>
+            <div id="poem" class="poem-text" data-edit-key="poem-text">
+                In your eyes I found my home,<br>
+                In your arms I found my peace.<br>
+                Forgive me for the clouds I brought,<br>
+                Let me be the sunshine you deserve.
+            </div>
+            <button onclick="showCard()">Take Your Special Card</button>
+        </div>
+    </div>
+
+    <!-- FINAL CARD -->
+    <div id="final-card" class="section final-card-section" style="display: none;">
+        <div class="final-card soft-card">
+            <h1 data-edit-key="final-title">My Forever Valentine</h1>
+            <div class="card-gallery">
+                <img id="final-img-1" data-edit-src="final-img-1" src="https://picsum.photos/id/1011/280/280" alt="Us">
+                <img id="final-img-2" data-edit-src="final-img-2" src="https://picsum.photos/id/1027/280/280" alt="Love">
+            </div>
+            <p class="final-message" data-edit-key="final-message">
+                You are the most beautiful chapter of my life.<br>
+                I promise to love you louder, better, and forever.<br><br>
+                <strong>Will you be mine again?</strong>
+            </p>
+            <div class="final-emoji">💍❤️🌹</div>
+        </div>
+    </div>
+
+    <canvas id="confetti"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
