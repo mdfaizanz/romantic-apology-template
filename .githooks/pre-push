@@ -1,0 +1,19 @@
+#!/bin/sh
+# pre-push hook: prevent pushes when there are unmerged files or conflict markers
+# Install by running `git config core.hooksPath .githooks`
+
+# Abort if there are unmerged paths
+if git diff --name-only --diff-filter=U | grep -q .; then
+  echo "ERROR: Unmerged paths present. Resolve merges before pushing." >&2
+  git status --porcelain
+  exit 1
+fi
+
+# Abort if any conflict markers remain in the working tree
+if (grep -R --line-number -e '<<<<<<<' -e '>>>>>>>' -e '=======' -- . 2>/dev/null | grep -q .); then
+  echo "ERROR: Conflict markers found in files. Resolve them before pushing." >&2
+  exit 1
+fi
+
+# All good
+exit 0
